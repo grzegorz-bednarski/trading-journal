@@ -1,22 +1,14 @@
 from collections.abc import Sequence
 from typing import Any
 
-from factory import Faker, post_generation
+from factory import Faker
+from factory import post_generation
 from factory.django import DjangoModelFactory
 
 from trading_journal.users.models import User
 
 
 class UserFactory(DjangoModelFactory[User]):
-    """
-    Factory for creating User instances.
-
-    Attributes:
-        email (str): The email address of the user.
-        name (str): The name of the user, generated using Faker.
-        password (str): The password for the user.
-    """
-
     email = Faker("email")
     name = Faker("name")
 
