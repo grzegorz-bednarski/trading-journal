@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from trading_journal.journal.models import Account, History, Position
+from trading_journal.journal.models import Account
+from trading_journal.journal.models import History
+from trading_journal.journal.models import Position
 
 
 @admin.register(Account)
