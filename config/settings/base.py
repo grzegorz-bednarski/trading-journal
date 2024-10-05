@@ -75,8 +75,11 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    "trading_journal.contrib",
+    "trading_journal.core",
+    "trading_journal.journal",
+    "trading_journal.markets",
     "trading_journal.users",
-    # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
