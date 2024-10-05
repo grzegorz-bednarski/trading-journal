@@ -1,0 +1,16 @@
+services:
+  docs:
+    image: trading_journal_local_docs
+    container_name: trading_journal_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    env_file:
+      - ./.envs/.local/.django
+    volumes:
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./trading_journal:/app/trading_journal:z
+    ports:
+      - '9000:9000'
+    command: /start-docs
