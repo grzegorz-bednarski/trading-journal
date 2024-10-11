@@ -1,9 +1,6 @@
 from django.contrib import admin
 
-from trading_journal.markets.models import Broker
-from trading_journal.markets.models import Market
-from trading_journal.markets.models import Symbol
-from trading_journal.markets.models import SymbolType
+from trading_journal.markets.models import Broker, Market, Symbol, SymbolType
 
 
 @admin.register(Broker)

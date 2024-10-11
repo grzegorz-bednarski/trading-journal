@@ -2,10 +2,7 @@ from django.contrib import admin
 from django.test import TestCase
 from django.urls import reverse
 
-from trading_journal.markets.models import Broker
-from trading_journal.markets.models import Market
-from trading_journal.markets.models import Symbol
-from trading_journal.markets.models import SymbolType
+from trading_journal.markets.models import Broker, Market, Symbol, SymbolType
 from trading_journal.users.tests.factories import UserFactory
 
 

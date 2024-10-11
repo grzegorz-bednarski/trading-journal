@@ -1,13 +1,7 @@
 from django.test import TestCase
 
-from trading_journal.markets.models import Broker
-from trading_journal.markets.models import Market
-from trading_journal.markets.models import Symbol
-from trading_journal.markets.models import SymbolType
-from trading_journal.markets.tests.factories import BrokerFactory
-from trading_journal.markets.tests.factories import MarketFactory
-from trading_journal.markets.tests.factories import SymbolFactory
-from trading_journal.markets.tests.factories import SymbolTypeFactory
+from trading_journal.markets.models import Broker, Market, Symbol, SymbolType
+from trading_journal.markets.tests.factories import BrokerFactory, MarketFactory, SymbolFactory, SymbolTypeFactory
 
 
 class MarketTestCase(TestCase):
