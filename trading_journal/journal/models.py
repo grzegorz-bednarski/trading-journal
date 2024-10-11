@@ -170,9 +170,7 @@ class History(models.Model):
         if cls.objects.filter(account=position.account, position=position).exists():
             raise PositionAlreadyExistsError
 
-        last_one = (
-            cls.objects.filter(account=position.account).order_by("-created_at").first()
-        )
+        last_one = cls.objects.filter(account=position.account).order_by("-created_at").first()
 
         if not force and last_one and last_one.created_at > position.closed_at:
             raise TemporalDisturbanceError
