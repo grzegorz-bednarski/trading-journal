@@ -7,6 +7,22 @@ from trading_journal.core.helpers import get_joined_m2m_names
 
 
 class Market(models.Model):
+    """
+    Market Model
+
+    This model represents a market with a name attribute.
+
+    Attributes:
+        name (CharField): The name of the market. It has a maximum length of 50 characters.
+
+    Meta:
+        verbose_name (str): The singular name for a market.
+        verbose_name_plural (str): The plural name for markets.
+
+    Methods:
+        __str__: Returns the name of the market.
+    """
+
     name = models.CharField(_("Name"), max_length=50)
 
     class Meta:
@@ -18,6 +34,24 @@ class Market(models.Model):
 
 
 class Broker(models.Model):
+    """
+    Represents a Broker in the system. Brokers can be associated
+    with multiple markets.
+
+    Attributes:
+        name (CharField): The name of the broker, with a maximum length of 300 characters.
+        markets (ManyToManyField): A many-to-many relationship to the Market model. This field is optional
+        (can be blank) and relates back to brokers via the related name 'brokers'.
+
+    Meta:
+        verbose_name: The human-readable name of the model in singular form.
+        verbose_name_plural: The human-readable name of the model in plural form.
+
+    Methods:
+        __str__: Returns the name of the broker.
+        markets_names: Returns a comma-separated string of the names of the markets associated with the broker.
+    """
+
     name = models.CharField(_("Name"), max_length=300)
     markets = models.ManyToManyField(
         Market,
@@ -39,6 +73,18 @@ class Broker(models.Model):
 
 
 class SymbolType(models.Model):
+    """
+    A Django model representing different types of symbols.
+
+    The `SymbolType` model provides a way to classify and manage symbol categories in the application.
+
+    Attributes:
+        name (CharField): The unique name of the symbol type with a maximum length of 50 characters.
+
+    Methods:
+        __str__(): Returns the name of the symbol type.
+    """
+
     name = models.CharField(_("Name"), max_length=50, unique=True)
 
     class Meta:
@@ -50,6 +96,39 @@ class SymbolType(models.Model):
 
 
 class Symbol(models.Model):
+    """
+    Represents a financial symbol such as a stock ticker.
+
+    Attributes
+    ----------
+    name : CharField
+        The name of the financial symbol.
+    code : CharField
+        A short code representing the financial symbol.
+    type : ForeignKey to SymbolType
+        The type of financial symbol (e.g., stock, bond).
+    brokers : ManyToManyField to Broker
+        The brokers associated with the financial symbol.
+    market : ForeignKey to Market
+        The market in which the financial symbol is traded.
+
+    Meta
+    ----
+    verbose_name : str
+        The human-readable name for the object, "Symbol".
+    verbose_name_plural : str
+        The plural form of the human-readable name, "Symbols".
+    unique_together : tuple
+        Ensures that the combination of code and market is unique.
+
+    Methods
+    -------
+    __str__()
+        Returns the name of the financial symbol.
+    brokers_names() -> str
+        Returns a comma-separated list of broker names associated with the symbol.
+    """
+
     name = models.CharField(_("Name"), max_length=300)
     code = models.CharField(_("Code"), max_length=15)
     type = models.ForeignKey(

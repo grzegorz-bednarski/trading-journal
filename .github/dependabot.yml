@@ -98,3 +98,8 @@ updates:
     # Every weekday
     schedule:
       interval: 'daily'
+    ignore:
+      - dependency-name: "django"
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
