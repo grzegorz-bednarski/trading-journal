@@ -8,12 +8,13 @@ from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 from trading_journal.core.models import OwnerModel
-from trading_journal.journal.exceptions import PositionAlreadyExistsError
-from trading_journal.journal.exceptions import PositionNotClosedError
-from trading_journal.journal.exceptions import TemporalDisturbanceError
+from trading_journal.journal.exceptions import (
+    PositionAlreadyExistsError,
+    PositionNotClosedError,
+    TemporalDisturbanceError,
+)
 from trading_journal.journal.types import OperationType
-from trading_journal.markets.models import Broker
-from trading_journal.markets.models import Symbol
+from trading_journal.markets.models import Broker, Symbol
 
 
 class Account(OwnerModel):
