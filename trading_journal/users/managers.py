@@ -8,11 +8,29 @@ if TYPE_CHECKING:
 
 
 class UserManager(DjangoUserManager["User"]):
-    """Custom manager for the User model."""
+    """
+    UserManager is a custom user model manager that handles the creation
+    of user and superuser accounts.
+
+    Methods:
+        _create_user(email, password, **extra_fields):
+            Create and save a user with the given email and password.
+
+        create_user(email, password=None, **extra_fields):
+            Public method to create and save a standard user with the given
+            email and password.
+
+        create_superuser(email, password=None, **extra_fields):
+            Public method to create and save a superuser with the given
+            email and password.
+    """
 
     def _create_user(self, email: str, password: str | None, **extra_fields):
         """
-        Create and save a user with the given email and password.
+        :param email: User's email address, must be a valid email format and is required.
+        :param password: User's password, can be None if the password is not required.
+        :param extra_fields: Additional fields for creating the user, provided as keyword arguments.
+        :return: The newly created user instance.
         """
         if not email:
             msg = "The given email must be set"
@@ -24,11 +42,24 @@ class UserManager(DjangoUserManager["User"]):
         return user
 
     def create_user(self, email: str, password: str | None = None, **extra_fields):  # type: ignore[override]
+        """
+        :param email:
+        :param password:
+        :param extra_fields:
+        :return:
+
+        """
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email: str, password: str | None = None, **extra_fields):  # type: ignore[override]
+        """
+        :param email: The email address for the superuser.
+        :param password: The password for the superuser. If None, a password must be set later.
+        :param extra_fields: Additional fields for the user model.
+        :return: The created superuser instance.
+        """
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
